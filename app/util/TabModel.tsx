@@ -50,6 +50,8 @@ export class TabModel extends EventEmitter {
     const iframe = document.createElement("iframe");
 
     iframe.src = PROXIES[fetchSettings().proxy].encode(this.url);
+    iframe.id = this.id;
+    iframe.classList.add("hidden");
     this.isLoading = true;
 
     iframe.onload = () => {
@@ -122,7 +124,12 @@ export class TabModel extends EventEmitter {
 
   setActive(active: boolean) {
     if (active) {
-      TabModel.tabs.forEach((tab) => tab.setActive(false));
+      TabModel.tabs.forEach((tab) => {
+        tab.setActive(false);
+        tab.iframe.classList.add("hidden");
+      });
+
+      this.iframe.classList.remove("hidden");
     }
 
     this.active = active;

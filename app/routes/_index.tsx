@@ -103,7 +103,9 @@ export default function Inxex() {
         setReady(true);
       }, 10000);
     } else {
-      alert("Service workers are not supported in this browser.");
+      setStatus(
+        "Failed to Load: Service workers are not supported in this browser."
+      );
     }
   }
 
