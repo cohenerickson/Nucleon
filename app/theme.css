@@ -1,0 +1,16 @@
+:root {
+  --background: #121212;
+  --tab-deselected: #333333;
+  --tab-selected: #444444;
+  --tab-hover: #555555;
+  --text: white;
+  --button-hover: rgba(255, 255, 255, 0.1);
+  --accent: #dc2626;
+  --reactour-accent: var(--accent);
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
