@@ -1,10 +1,15 @@
-import { PROXIES } from "./ProxyManager";
-import { settings } from "./SettingsManager";
+import { PROXIES, fetchSettings, resolveSearchEngine } from "./SettingsManager";
 import EventEmitter from "events";
 import { v4 } from "uuid";
 
 export class TabModel extends EventEmitter {
   static tabs: TabModel[] = [];
+  static listeners: Record<string, ((...args: any[]) => void)[]> = {};
+  static _on(event: string, listener: (...args: any[]) => void) {
+    if (!this.listeners[event]) this.listeners[event] = [];
+    this.listeners[event].push(listener);
+  }
+
   id: string;
   title: string;
   url: string;
@@ -20,9 +25,10 @@ export class TabModel extends EventEmitter {
     try {
       new URL(url);
     } catch (error) {
-      url = `https://www.google.com/search?q=${encodeURIComponent(
-        url
-      )}&size=64`;
+      url = resolveSearchEngine().pattern.replace(
+        "%s",
+        encodeURIComponent(url)
+      );
     }
 
     this.id = v4();
@@ -34,17 +40,22 @@ export class TabModel extends EventEmitter {
     this.startUpdateLoop();
 
     TabModel.tabs.push(this);
+
+    TabModel.listeners["new"]?.forEach((listener) => listener(this));
+
+    this.emit("update");
   }
 
   createIframe() {
     const iframe = document.createElement("iframe");
 
-    iframe.src = PROXIES[settings.proxy].encode(this.url);
+    iframe.src = PROXIES[fetchSettings().proxy].encode(this.url);
     this.isLoading = true;
 
     iframe.onload = () => {
       this.isLoading = false;
       this.emit("update");
+      this.emit("load");
     };
 
     document.getElementById("iframes")!.appendChild(iframe);
@@ -59,7 +70,7 @@ export class TabModel extends EventEmitter {
         this.iframe.contentDocument?.querySelector<HTMLLinkElement>(
           "link[rel='icon']"
         )?.href ||
-          `https://www.google.com/s2/favicons?domain=${new URL(this.url).host}`
+          `https://www.google.com/s2/favicons?domain=${new URL(this.url).host}&size=64`
       ).href;
 
       if (title !== this.title || favicon !== this.favicon) {
@@ -81,7 +92,7 @@ export class TabModel extends EventEmitter {
 
     let activeTab;
     if (TabModel.tabs.length === 0) {
-      activeTab = new TabModel("https://www.google.com/");
+      activeTab = new TabModel(resolveSearchEngine().homepage);
     } else {
       activeTab = TabModel.tabs[index] || TabModel.tabs[index - 1];
     }

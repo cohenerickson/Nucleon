@@ -7,6 +7,12 @@ export function TabBar() {
   const [tabs, setTabs] = useState<TabModel[]>([]);
 
   useEffect(() => {
+    TabModel._on("new", (tab) => {
+      setTabs([...tabs, tab]);
+    });
+  });
+
+  useEffect(() => {
     tabs.forEach((tab) => {
       tab.removeAllListeners("update");
 
@@ -14,6 +20,15 @@ export function TabBar() {
         setTabs([...tabs]);
       });
     });
+
+    // const orderedURLs = tabs.map((tab) => tab.url);
+    // const activeIndex = Math.max(
+    //   tabs.findIndex((tab) => tab.active),
+    //   0
+    // );
+
+    // localStorage.setItem("tabs", JSON.stringify(orderedURLs));
+    // localStorage.setItem("activeTab", activeIndex.toString());
   }, [tabs]);
 
   return (
@@ -36,7 +51,11 @@ export function TabBar() {
               }}
               exit={{ opacity: 0, x: -20, transition: { duration: 0.1 } }}
               value={tab}
-              className={`flex h-10 max-w-[250px] flex-1 flex-nowrap items-center justify-between overflow-clip whitespace-nowrap rounded-md ${tab.active ? "bg-tab-selected" : "bg-tab-deselected"} p-2 shadow-lg`}
+              title={tab.url}
+              onMouseDown={() => {
+                tab.setActive(true);
+              }}
+              className={`flex h-10 max-w-[250px] flex-1 flex-nowrap items-center justify-between overflow-clip whitespace-nowrap rounded-md ${tab.active ? "bg-tab-selected" : "bg-tab-deselected hover:bg-tab-hover"} p-2 shadow-lg`}
             >
               <div className="flex items-center gap-2">
                 <img src={tab.favicon} className="aspect-square h-4"></img>
@@ -59,7 +78,7 @@ export function TabBar() {
         id="new-tab-button"
         className="flex h-10 w-10 items-center justify-center rounded-md bg-tab-deselected p-1 shadow-lg transition-colors hover:bg-button-hover"
         onClick={() => {
-          setTabs([...tabs, new TabModel("https://www.google.com/")]);
+          new TabModel("https://www.google.com/");
         }}
       >
         <FiPlus />

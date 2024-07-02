@@ -1,19 +1,17 @@
-import { useTour } from "@reactour/tour";
 import { motion, useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
 
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-export function Loader() {
+export function SplashScreen({
+  ready,
+  status
+}: {
+  ready: boolean;
+  status: string;
+}) {
   const [scope, animate] = useAnimate();
   const [hidden, setHidden] = useState<boolean>(false);
-  const { setIsOpen } = useTour();
 
-  async function runAnimation() {
-    await sleep(1000);
-
+  async function closeSplashScreen() {
     await animate(scope.current, {
       opacity: 0,
       transition: {
@@ -22,18 +20,11 @@ export function Loader() {
     });
 
     setHidden(true);
-
-    const hasVisited = localStorage.getItem("hasVisited") === "true";
-
-    if (!hasVisited) {
-      //localStorage.setItem("hasVisited", "true");
-      setIsOpen(true);
-    }
   }
 
   useEffect(() => {
-    runAnimation();
-  }, []);
+    if (ready) closeSplashScreen();
+  }, [ready]);
 
   return (
     <motion.section
@@ -45,7 +36,7 @@ export function Loader() {
     >
       <img src="/logo.svg" className="w-32"></img>
       <h1 className="text-7xl font-black">Nucleon</h1>
-      <p className="">The Unrestrictd Browsing Experience.</p>
+      <p className="">{status}</p>
     </motion.section>
   );
 }

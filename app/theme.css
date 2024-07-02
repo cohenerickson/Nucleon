@@ -1,10 +1,21 @@
-:root {
+html[data-theme="dark"] {
   --background: #121212;
   --tab-deselected: #333333;
-  --tab-selected: #444444;
-  --tab-hover: #555555;
+  --tab-selected: #555555;
+  --tab-hover: #444444;
   --text: white;
   --button-hover: rgba(255, 255, 255, 0.1);
+  --accent: #dc2626;
+  --reactour-accent: var(--accent);
+}
+
+html[data-theme="light"] {
+  --background: white;
+  --tab-deselected: #f1f1f1;
+  --tab-selected: #e1e1e1;
+  --tab-hover: #d1d1d1;
+  --text: black;
+  --button-hover: rgba(0, 0, 0, 0.1);
   --accent: #dc2626;
   --reactour-accent: var(--accent);
 }
