@@ -5,6 +5,7 @@ import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 // @ts-expect-error
 import { libcurlPath } from "@mercuryworkshop/libcurl-transport";
+import { scramjetPath } from "@mercuryworkshop/scramjet";
 import { createRequestHandler } from "@remix-run/express";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { createBareServer } from "@tomphttp/bare-server-node";
@@ -85,6 +86,7 @@ const staticOptions: Parameters<typeof express.static>[1] = {
   }
 };
 app.use("/uv", express.static(uvPath, staticOptions));
+app.use("/scramjet", express.static(scramjetPath, staticOptions));
 app.use("/baremux", express.static(baremuxPath, staticOptions));
 app.use("/transports/epoxy", express.static(epoxyPath, staticOptions));
 app.use("/transports/libcurl", express.static(libcurlPath, staticOptions));

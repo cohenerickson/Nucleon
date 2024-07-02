@@ -15,7 +15,7 @@
     "@mercuryworkshop/bare-mux": "^1.1.2",
     "@mercuryworkshop/epoxy-transport": "^2.0.1",
     "@mercuryworkshop/libcurl-transport": "^1.3.1",
-    "@mercuryworkshop/scramjet": "^1.0.0",
+    "@mercuryworkshop/scramjet": "^1.0.1",
     "@remix-run/express": "^2.10.0",
     "@remix-run/node": "^2.10.0",
     "@remix-run/react": "^2.10.0",
