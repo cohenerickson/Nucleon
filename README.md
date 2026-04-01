@@ -1,40 +1,40 @@
-# Welcome to Remix!
+# Nucleon
 
-- 📖 [Remix docs](https://remix.run/docs)
+## Getting Started
 
-## Development
+### Installing Prerequisites
 
-Run the dev server:
+You can skip these steps if you already have the prerequisites installed.
 
-```shellscript
-npm run dev
+```bash
+# GCC
+sudo apt update
+sudo apt install build-essential
+
+# Rust & Rust Nightly
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup toolchain install nightly
+
+# NodeJS
+sudo apt install nodejs
+
+# PNPM
+curl -fsSL https://get.pnpm.io/install.sh | sh -
 ```
 
-## Deployment
+### Downloading Source
 
-First, build your app for production:
+Download and install node dependencies
 
-```sh
-npm run build
+```bash
+git clone --recurse-submodules https://github.com/cohenerickson/Nucleon.git
+cd Nucleon
+pnpm ci
 ```
 
-Then run the app in production mode:
+### Build Dependencies
 
-```sh
-npm start
+```bash
+cd epoxy-tls/server
+cargo b -r
 ```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.

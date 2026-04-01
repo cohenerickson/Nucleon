@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: white;
+  --color-text: black;
+
+  /* Tab Colors */
+  --color-tab-bar-bg: #fafafa;
+  --color-tab-bar-border: #f0f0f0;
+
+  --color-tab-text: black;
+  --color-tab-bg: #efefef;
+  --color-tab-bg-hover: #e0e0e0;
+  --color-tab-border: #e0e0e0;
+  --color-tab-button-hover-bg: #d0d0d0;
+
+  --color-tab-text-active: black;
+  --color-tab-bg-active: #c9c9c9;
+  --color-tab-bg-hover-active: #c0c0c0;
+  --color-tab-border-active: #c0c0c0;
+  --color-tab-button-hover-bg-active: #b0b0b0;
+
+  /*  */
+  --color-nav-bar-bg: #ffffff;
+  --color-nav-button-bg: #f0f0f0;
+  --color-nav-button-bg-hover: #e0e0e0;
+}
+
+* {
+  @apply select-none;
+}
+
+input {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  outline: none; /* Removes the default focus outline */
+  box-shadow: none;
+  /* Platform-specific resets for certain input types */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.glass {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}

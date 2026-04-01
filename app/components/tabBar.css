@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@reference "../app.css";
+
+@theme {
+  --color-frame: #fafafa;
+  --color-tab_background_text: black;
+  --color-tab_selected: #c9c9c9;
+  --color-tab_line: #f0f0f0;
+}
+
+@theme {
+  --color-toolbar: #efefef;
+  --color-toolbar_vertical_separator: #e0e0e0;
+}
+
+.tab-bar {
+  @apply flex gap-1 p-1 w-full h-11 bg-frame border-b border-tab_line;
+
+  .tab {
+    @apply text-tab_background_text transition-all pl-3 pr-2 py-1 flex gap-2 items-center justify-center text-sm w-48 bg-toolbar border-toolbar_vertical_separator rounded-md h-9;
+    
+    &.active {
+      @apply bg-tab_selected border-tab_line;
+      
+      &:hover {
+        @apply bg-tab-bg-hover-active;
+      }
+
+      .button:hover {
+        @apply bg-tab-button-hover-bg-active;
+      }
+    }
+
+    &:hover {
+      @apply bg-tab-bg-hover;
+    }
+
+    &.pinned {
+      @apply w-9 p-0;
+      
+      label, .button {
+        @apply hidden;
+      }
+    }
+
+    .button {
+      @apply rounded h-5 w-5 flex items-center justify-center;
+    }
+
+    .button:hover {
+      @apply bg-tab-button-hover-bg;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@reference "../app.css";
+
+.tool-bar {
+  @apply w-full h-10 bg-nav-bar-bg flex items-center gap-1 px-2;
+
+  .browser-button {
+    @apply w-7 h-7 bg-tab-bg rounded flex items-center justify-center;
+
+    &:hover {
+      @apply bg-tab-bg-hover;
+    }
+  }
+}
+

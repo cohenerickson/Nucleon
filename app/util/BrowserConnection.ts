@@ -1,0 +1,105 @@
+import { RPC } from "../browser/util/RPC";
+
+export class BrowserConnection {
+  #sw: ServiceWorker | null = null;
+  #rpc: RPC | null = null;
+
+  constructor() {
+    this.initialize();
+  }
+
+  get ready(): Promise<void> {
+    return new Promise((resolve) => {
+      const checkReady = () => {
+        if (this.#sw) {
+          resolve();
+        } else {
+          setTimeout(checkReady, 100);
+        }
+      };
+      checkReady();
+    });
+  }
+
+  get sw(): ServiceWorker {
+    if (!this.#sw) {
+      throw new Error("BrowserConnection not ready yet");
+    }
+
+    return this.#sw;
+  }
+
+  get rpc(): RPC {
+    if (!this.#rpc) {
+      throw new Error("BrowserConnection RPC not initialized yet");
+    }
+    return this.#rpc;
+  }
+
+  private async initialize() {
+    const serviceWorker = await this.initializeServiceWorker();
+    this.#sw = serviceWorker;
+    this.#rpc = new RPC(`nucleon-browser-connection`);
+    console.debug(
+      "BrowserConnection initialized with service worker:",
+      serviceWorker
+    );
+  }
+
+  private async initializeServiceWorker(): Promise<ServiceWorker> {
+    if (!("serviceWorker" in navigator)) {
+      throw new Error("Service workers not supported");
+    }
+
+    // If there's already an active service worker, use it
+    if (navigator.serviceWorker.controller) {
+      await waitForState(navigator.serviceWorker.controller, "activated");
+      return navigator.serviceWorker.controller;
+    }
+
+    // Otherwise, register a new service worker
+    await navigator.serviceWorker.register("/sw.js", {
+      scope: "/app",
+      updateViaCache: "none",
+      type: "module"
+    });
+
+    // Wait for the service worker to become active
+    const worker = await waitForController();
+    await waitForState(worker, "activated");
+    return worker;
+  }
+}
+
+async function waitForController(): Promise<ServiceWorker> {
+  console.log("Waiting for service worker controller...");
+  return new Promise((resolve, reject) => {
+    const checkState = () => {
+      console.log(navigator.serviceWorker.controller);
+      if (navigator.serviceWorker.controller) {
+        resolve(navigator.serviceWorker.controller);
+      } else {
+        setTimeout(checkState, 100);
+      }
+    };
+    checkState();
+  });
+}
+
+async function waitForState(
+  serviceWorker: ServiceWorker,
+  desiredState: ServiceWorkerState
+): Promise<void> {
+  console.log(`Waiting for service worker to reach state: ${desiredState}...`);
+  return new Promise((resolve) => {
+    if (serviceWorker.state === desiredState) {
+      resolve();
+    } else {
+      serviceWorker.addEventListener("statechange", () => {
+        if (serviceWorker.state === desiredState) {
+          resolve();
+        }
+      });
+    }
+  });
+}

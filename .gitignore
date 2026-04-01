@@ -1,5 +1,13 @@
-node_modules
-
-/.cache
-/build
+.DS_Store
 .env
+/node_modules/
+
+# React Router
+/.react-router/
+/build/
+
+# Public assets - We generate these during the build process
+/public/*
+
+# Packages - only exists due to the latest version of scramjet not being published to npm yet
+/packages/
