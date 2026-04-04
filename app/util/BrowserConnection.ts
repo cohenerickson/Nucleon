@@ -75,9 +75,17 @@ export class BrowserConnection {
 async function waitForController(): Promise<ServiceWorker> {
   log.debug("Waiting for service worker controller...");
   return new Promise((resolve, reject) => {
-    const checkState = () => {
+    const checkState = async () => {
+      // If the user reloads the page with Ctrl + Shift + R, after the first load
+      // for some reason the service worker doesn't properly claim the page even
+      // if it's active, so if the service worker is active but there's no controller
+      // we will force a reload to fix this
+      const ready = await navigator.serviceWorker.ready;
+
       if (navigator.serviceWorker.controller) {
         resolve(navigator.serviceWorker.controller);
+      } else if (ready) {
+        window.location.reload();
       } else {
         setTimeout(checkState, 100);
       }
