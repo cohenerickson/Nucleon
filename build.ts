@@ -2,11 +2,11 @@ import { context, type BuildOptions } from "esbuild";
 import { scramjetPath } from "@mercuryworkshop/scramjet/path";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
-// @ts-ignore - Typescript doesn't like this for some reason, will have to revisit later
+// @ts-expect-error - Typescript doesn't like this for some reason, will have to revisit later
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { libcurlPath } from "@mercuryworkshop/libcurl-transport";
 import * as fs from "fs/promises";
-import { watch, watchFile } from "fs";
+import { watchFile } from "fs";
 
 const isDev = process.argv.includes("--dev");
 
@@ -19,8 +19,10 @@ const baseContextOptions = {
   bundle: true,
   outdir: "public",
   sourcemap: "linked",
+  legalComments: "linked",
   format: "esm",
-  minify: !isDev
+  minify: !isDev,
+  external: ["/scram/scramjet.all.js"]
 } satisfies BuildOptions;
 
 // Copy static assets for proxies
@@ -37,7 +39,6 @@ await fs.cp(epoxyPath, "public/epoxy", { recursive: true });
 await fs.cp(libcurlPath, "public/libcurl", { recursive: true });
 
 // Copy static assets for the app
-await fs.cp("./app/resources", "public", { recursive: true });
 await generateManifest();
 
 async function generateManifest() {

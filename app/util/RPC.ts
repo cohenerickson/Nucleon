@@ -16,7 +16,7 @@ export class RPC {
     }
   }
 
-  on(method: string, handler: (...args: any[]) => Promise<any> | any) {
+  expose(method: string, handler: (...args: any[]) => Promise<any> | any) {
     this.broadcastChannel.addEventListener("message", async ({ data }) => {
       if (data && data.method === method && data.id) {
         this.debug("Received RPC request:", method, data.params);
@@ -72,5 +72,9 @@ export class RPC {
 
       this.debug("Sent RPC call:", requestId);
     });
+  }
+
+  destroy() {
+    this.broadcastChannel.close();
   }
 }

@@ -1,4 +1,5 @@
-import { RPC } from "../browser/util/RPC";
+import { RPC } from "../util/RPC";
+import { log } from "./Logger";
 
 export class BrowserConnection {
   #sw: ServiceWorker | null = null;
@@ -40,7 +41,7 @@ export class BrowserConnection {
     const serviceWorker = await this.initializeServiceWorker();
     this.#sw = serviceWorker;
     this.#rpc = new RPC(`nucleon-browser-connection`);
-    console.debug(
+    log.debug(
       "BrowserConnection initialized with service worker:",
       serviceWorker
     );
@@ -72,10 +73,9 @@ export class BrowserConnection {
 }
 
 async function waitForController(): Promise<ServiceWorker> {
-  console.log("Waiting for service worker controller...");
+  log.debug("Waiting for service worker controller...");
   return new Promise((resolve, reject) => {
     const checkState = () => {
-      console.log(navigator.serviceWorker.controller);
       if (navigator.serviceWorker.controller) {
         resolve(navigator.serviceWorker.controller);
       } else {
@@ -90,7 +90,7 @@ async function waitForState(
   serviceWorker: ServiceWorker,
   desiredState: ServiceWorkerState
 ): Promise<void> {
-  console.log(`Waiting for service worker to reach state: ${desiredState}...`);
+  log.debug(`Waiting for service worker to reach state: ${desiredState}...`);
   return new Promise((resolve) => {
     if (serviceWorker.state === desiredState) {
       resolve();

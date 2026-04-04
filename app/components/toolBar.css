@@ -1,14 +1,49 @@
+@import "tailwindcss";
 @reference "../app.css";
 
+@theme {
+  --color-frame: #fafafa;
+  --color-tab_text: black;
+  --color-tab_selected: #c9c9c9;
+  --color-tab_line: #f0f0f0;
+}
+
+@theme {
+  --color-toolbar: #efefef;
+  --color-toolbar_button_icon: inherit;
+  --color-button_background: inherit;
+  --color-toolbar_vertical_separator: #e0e0e0;
+  --color-toolbar_button_icon: black;
+}
+
 .tool-bar {
-  @apply w-full h-10 bg-nav-bar-bg flex items-center gap-1 px-2;
+  @apply w-full bg-toolbar h-10 flex items-center gap-2 px-2 text-toolbar_button_icon;
 
   .browser-button {
-    @apply w-7 h-7 bg-tab-bg rounded flex items-center justify-center;
+    @apply text-lg w-6 h-6 bg-toolbar rounded flex items-center justify-center transition-all;
 
     &:hover {
-      @apply bg-tab-bg-hover;
+      @apply brightness-75;
+    }
+
+    &.disabled {
+      @apply opacity-50;
+    }
+  }
+
+  .url-bar {
+    @apply flex-1 flex items-center justify-center h-7 rounded px-0.5 gap-2 text-sm bg-frame mx-1;
+
+    .browser-button {
+      @apply bg-frame;
+
+      &:hover {
+        @apply brightness-90 bg-toolbar;
+      }
+    }
+
+    input {
+      @apply flex-1 text-sm;
     }
   }
 }
-

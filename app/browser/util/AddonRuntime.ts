@@ -2,10 +2,10 @@
  * This file is part of the main service worker scope.
  * See app/browser/services/ServiceWorker.ts for more details.
  */
-import { RPC } from "./RPC";
+import { RPC } from "../../util/RPC";
 import { browserDB, browserRPC } from "../services/ServiceWorker";
 import type { Manifest } from "../types/Manifest";
-import { log } from "./Logger";
+import { log } from "../../util/Logger";
 import { lt, gt } from "semver";
 import MANIFEST from "../../../package.json";
 
@@ -102,7 +102,7 @@ export class AddonRuntime extends RPC {
   }
 
   private async initTheme(manifest: Manifest) {
-    const activeTheme = await browserDB.get("browserState", "activeTheme");
+    const activeTheme = await (await browserDB).get("browserState", "activeTheme");
 
     if (activeTheme === this.id) {
       log.info(`[AddonRuntime] Activating theme ${this.id}`);

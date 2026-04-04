@@ -29,35 +29,35 @@ export class Logger extends EventEmitter<LogEvents> {
   }
 
   debug(...args: any[]) {
-    //if (this.level <= LogLevel.DEBUG) {
-    this.ctx.log("[DEBUG]", ...args);
-    this.emit("debug", ...args);
-    //}
+    if (this.level <= LogLevel.DEBUG) {
+      this.ctx.debug("[DEBUG]", ...args);
+      this.emit("debug", ...args);
+    }
   }
 
   info(...args: any[]) {
-    //if (this.level <= LogLevel.INFO) {
-    this.ctx.log("[INFO]", ...args);
-    this.emit("info", ...args);
-    //}
+    if (this.level <= LogLevel.INFO) {
+      this.ctx.info("[INFO]", ...args);
+      this.emit("info", ...args);
+    }
   }
 
   warn(...args: any[]) {
-    //if (this.level <= LogLevel.WARN) {
-    this.ctx.log("[WARN]", ...args);
-    this.emit("warn", ...args);
-    //}
+    if (this.level <= LogLevel.WARN) {
+      this.ctx.warn("[WARN]", ...args);
+      this.emit("warn", ...args);
+    }
   }
 
   error(...args: any[]) {
-    //if (this.level <= LogLevel.ERROR) {
-    this.ctx.log("[ERROR]", ...args);
-    this.emit("error", ...args);
-    //}
+    if (this.level <= LogLevel.ERROR) {
+      this.ctx.error("[ERROR]", ...args);
+      this.emit("error", ...args);
+    }
   }
 
   fatal(...args: any[]) {
-    this.ctx.log("[FATAL]", ...args);
+    this.ctx.error("[FATAL]", ...args);
     this.emit("fatal", ...args);
     debugger;
     throw new Error(

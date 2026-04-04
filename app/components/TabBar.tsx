@@ -10,28 +10,28 @@ export function TabBar() {
     <div className="tab-bar">
       <div className="tab pinned active">
         <IoEarthOutline className="favicon" />
-        <label className="flex-1">New Tab</label>
+        <label className="text">New Tab</label>
         <div className="button">
           <IoClose />
         </div>
       </div>
       <div className="tab pinned">
         <IoEarthOutline className="favicon" />
-        <label className="flex-1">New Tab</label>
+        <label className="text">New Tab</label>
         <div className="button">
           <IoClose />
         </div>
       </div>
       <div className="tab">
         <IoEarthOutline className="favicon" />
-        <label className="flex-1">New Tab</label>
+        <label className="text">New Tab</label>
         <div className="button">
           <IoClose />
         </div>
       </div>
       <div className="tab active">
         <IoEarthOutline className="favicon" />
-        <label className="flex-1">New Tab</label>
+        <label className="text">New Tab</label>
         <div className="button">
           <IoClose />
         </div>

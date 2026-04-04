@@ -1,5 +1,5 @@
-import { log } from "../util/Logger";
-import { RPC } from "../util/RPC";
+import { log } from "../../util/Logger";
+import { RPC } from "../../util/RPC";
 import { openDB } from "idb";
 import type { BrowserDB } from "./BrowserStorage";
 
