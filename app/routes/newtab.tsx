@@ -1,16 +1,6 @@
 import { Sky } from "~/components/Sky";
 import { manifest } from "~/config/manifest";
 
-export function meta({}) {
-  return [
-    { title: manifest.name },
-    {
-      name: "description",
-      content: manifest.description
-    }
-  ];
-}
-
 export default function Home() {
   return (
     <Sky>

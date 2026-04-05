@@ -34,20 +34,6 @@ export const manifest = {
       }
     }
   ],
-  protocol_handlers: [
-    {
-      protocol: "nucleon",
-      url: "/app?nucleonUrl=%s"
-    },
-    {
-      protocol: "scram",
-      url: "/app?scramUrl=%s"
-    },
-    {
-      protocol: "uv",
-      url: "/app?uvUrl=%s"
-    }
-  ],
   theme_color: "white",
   background_color: "white",
   display: "fullscreen",
@@ -65,9 +51,5 @@ export const manifest = {
   file_handlers: {
     action: string;
     accept: Record<string, string[]>;
-  }[];
-  protocol_handlers: {
-    protocol: string;
-    url: string;
   }[];
 };

@@ -20,6 +20,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="manifest" href="/manifest.json" />
+        <title>Nucleon</title>
+        <meta
+          name="description"
+          content="The next-generation web proxy platform with seamless integration and enhanced privacy features."
+        />
         <Meta />
         <Links />
       </head>

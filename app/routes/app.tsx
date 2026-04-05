@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { manifest } from "~/config/manifest";
 import { TabBar } from "~/components/TabBar";
 import { motion, AnimatePresence } from "motion/react";
 import { BrowserConnection } from "~/util/BrowserConnection";
@@ -8,13 +7,6 @@ import { ToolBar } from "~/components/ToolBar";
 import { LoadingScreen } from "~/components/LoadingScreen";
 
 declare const BareMux: typeof import("@mercuryworkshop/bare-mux");
-
-export function meta({}) {
-  return [
-    { title: manifest.name },
-    { name: "description", content: manifest.description }
-  ];
-}
 
 function loadScript(
   src: string,

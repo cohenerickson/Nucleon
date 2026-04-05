@@ -40,6 +40,7 @@ await fs.cp(libcurlPath, "public/libcurl", { recursive: true });
 
 // Copy static assets for the app
 await generateManifest();
+await fs.cp("./app/assets", "./public", { recursive: true });
 
 async function generateManifest() {
   const { manifest } = await import("./app/config/manifest.ts?" + Date.now());
