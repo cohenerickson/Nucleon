@@ -20,55 +20,60 @@
   --color-frame_inactive: rgb(24, 25, 38);
   --color-bookmark_text: rgb(202, 211, 245);
   --color-tab_background_text: rgb(184, 192, 224);
-  --color-tab_background_text_inactive: rgb(165,173,203);
-  --color-tab_text: rgb(202,211,245);
-  --color-toolbar: rgb(36,39,58);
-  --color-toolbar_button_icon: rgb(202,211,245);
-  --color-button_background: rgb(24,25,38);
+  --color-tab_background_text_inactive: rgb(165, 173, 203);
+  --color-tab_text: rgb(202, 211, 245);
+  --color-toolbar: rgb(36, 39, 58);
+  --color-toolbar_button_icon: rgb(202, 211, 245);
+  --color-button_background: rgb(24, 25, 38);
 }
 
 /* Should each of these have their own internal css color varaible so we can have a coherent
  * hierarchy for different color properties applying to the same element simultaneously? */
 .tab-bar {
-  @apply flex gap-1 p-1 w-full h-11 bg-frame border-b border-toolbar/50;
+  @apply flex w-full h-11 bg-frame border-b border-toolbar/50;
 
-  .tab {
-    @apply text-tab_background_text transition-all pl-3 pr-2 py-1 flex gap-2 items-center justify-center text-sm w-48 bg-frame border-toolbar_vertical_separator rounded-md h-9;
-    
-    .text {
-      @apply text-xs flex-1;
-    }
+  .tab-section {
+    @apply flex py-1 pl-1 gap-1;
 
-    .button {
-      @apply text-sm bg-frame;
-    }
+    .tab {
+      @apply text-tab_background_text transition-colors pl-3 pr-2 py-1 flex gap-2 items-center justify-center text-sm w-48 bg-frame border-toolbar_vertical_separator rounded-md h-9;
 
-    &.active {
-      @apply bg-toolbar border-tab_line text-tab_text;
+      .text {
+        @apply text-xs flex-1;
+      }
 
       .button {
-        @apply bg-toolbar;
+        @apply text-sm bg-frame;
       }
-    }
 
-    &:hover {
-      @apply brightness-125;
-    }
+      &.active {
+        @apply bg-toolbar border-tab_line text-tab_text;
 
-    &.pinned {
-      @apply w-9 p-0;
-      
-      label, .button {
-        @apply hidden;
+        .button {
+          @apply bg-toolbar;
+        }
       }
-    }
 
-    .button {
-      @apply rounded h-5 w-5 flex items-center justify-center transition-all;
-    }
+      &:hover {
+        @apply brightness-125;
+      }
 
-    .button:hover {
-      @apply brightness-150;
+      &.pinned {
+        @apply w-9 p-0;
+
+        label,
+        .button {
+          @apply hidden;
+        }
+      }
+
+      .button {
+        @apply rounded h-5 w-5 flex items-center justify-center transition-all;
+      }
+
+      .button:hover {
+        @apply brightness-150;
+      }
     }
   }
 }
