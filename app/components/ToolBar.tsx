@@ -4,7 +4,6 @@ import {
   IoChevronForward,
   IoExtensionPuzzleOutline,
   IoHomeOutline,
-  IoInformation,
   IoInformationCircleOutline,
   IoMenuOutline,
   IoReload

@@ -67,6 +67,12 @@ export default function Home() {
               ) {
                 localStorage.clear();
                 sessionStorage.clear();
+                // clear caches
+                if (window.caches) {
+                  caches.keys().then((names) => {
+                    for (let name of names) caches.delete(name);
+                  });
+                }
                 navigator.serviceWorker
                   .getRegistrations()
                   .then((registrations) => {
