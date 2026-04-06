@@ -9,9 +9,14 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { LoadingScreen } from "./components/LoadingScreen";
 
 export function HydrateFallback() {
-  return <></>;
+  return (
+    <div className="-z-50">
+      <LoadingScreen />
+    </div>
+  );
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
