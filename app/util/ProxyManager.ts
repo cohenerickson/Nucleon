@@ -1,6 +1,6 @@
-import type { BareMuxConnection } from "@mercuryworkshop/bare-mux";
 import { Proxy } from "./proxies/Proxy";
 import { ScramJet } from "./proxies/ScramJet";
+import type { BareMuxConnection } from "@mercuryworkshop/bare-mux";
 
 const WISP_SERVER = "ws://127.0.0.1:5001/";
 

@@ -17,10 +17,10 @@
 }
 
 .tool-bar {
-  @apply w-full bg-toolbar h-10 flex items-center gap-2 px-2 text-toolbar_button_icon;
+  @apply bg-toolbar text-toolbar_button_icon flex h-10 w-full items-center gap-2 px-2;
 
   .browser-button {
-    @apply text-lg w-6 h-6 bg-toolbar rounded flex items-center justify-center transition-all;
+    @apply bg-toolbar flex h-6 w-6 items-center justify-center rounded text-lg transition-all;
 
     &:hover {
       @apply brightness-75;
@@ -32,13 +32,13 @@
   }
 
   .url-bar {
-    @apply flex-1 flex items-center justify-center h-7 rounded px-0.5 gap-2 text-sm bg-frame mx-1 whitespace-nowrap overflow-hidden;
+    @apply bg-frame mx-1 flex h-7 flex-1 items-center justify-center gap-2 overflow-hidden rounded px-0.5 text-sm whitespace-nowrap;
 
     .browser-button {
       @apply bg-frame;
 
       &:hover {
-        @apply brightness-90 bg-toolbar;
+        @apply bg-toolbar brightness-90;
       }
     }
 

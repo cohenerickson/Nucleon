@@ -1,5 +1,5 @@
-import { openDB, type IDBPDatabase, type DBSchema } from "idb";
 import type { browser } from "../api/Browser";
+import { openDB, type IDBPDatabase, type DBSchema } from "idb";
 
 export interface BrowserDB extends DBSchema {
   browserState: {

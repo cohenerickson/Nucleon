@@ -1,3 +1,5 @@
+import "./toolBar.css";
+import { use, useEffect, useRef, useState } from "react";
 import {
   IoBookmarkOutline,
   IoChevronBack,
@@ -8,8 +10,6 @@ import {
   IoMenuOutline,
   IoReload
 } from "react-icons/io5";
-import "./toolBar.css";
-import { use, useEffect, useRef, useState } from "react";
 
 export function ToolBar() {
   const urlRef = useRef<HTMLDivElement>(null);
@@ -97,7 +97,11 @@ export function ToolBar() {
           <div className="browser-button">
             <IoInformationCircleOutline />
           </div>
-          <div className="input" contentEditable="plaintext-only" ref={urlRef}></div>
+          <div
+            className="input"
+            contentEditable="plaintext-only"
+            ref={urlRef}
+          ></div>
         </div>
         <div className="browser-button">
           <IoExtensionPuzzleOutline />

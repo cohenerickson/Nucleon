@@ -1,12 +1,12 @@
-import { context, type BuildOptions } from "esbuild";
-import { scramjetPath } from "@mercuryworkshop/scramjet/path";
-import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 // @ts-expect-error - Typescript doesn't like this for some reason, will have to revisit later
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { libcurlPath } from "@mercuryworkshop/libcurl-transport";
-import * as fs from "fs/promises";
+import { scramjetPath } from "@mercuryworkshop/scramjet/path";
+import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
+import { context, type BuildOptions } from "esbuild";
 import { watchFile } from "fs";
+import * as fs from "fs/promises";
 
 const isDev = process.argv.includes("--dev");
 

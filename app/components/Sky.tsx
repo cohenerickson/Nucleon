@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
 // @ts-ignore
 import CLOUDS from "vanta/dist/vanta.clouds.min";
-import * as THREE from "three";
 
 export function Sky(props: any & { children: React.ReactNode }) {
   const [vantaEffect, setVantaEffect] = useState<CLOUDS>(null);

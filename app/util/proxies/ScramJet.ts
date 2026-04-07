@@ -1,8 +1,8 @@
+import { Proxy } from "./Proxy";
 import type {
   ScramjetInitConfig,
   ScramjetController
 } from "@mercuryworkshop/scramjet";
-import { Proxy } from "./Proxy";
 
 const CONFIG: Partial<ScramjetInitConfig> = {
   prefix: "/app/~/scramjet/",

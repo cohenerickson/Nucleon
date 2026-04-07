@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { TabBar } from "~/components/TabBar";
 import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
+import { LoadingScreen } from "~/components/LoadingScreen";
+import { TabBar } from "~/components/TabBar";
+import { ToolBar } from "~/components/ToolBar";
 import { BrowserConnection } from "~/util/BrowserConnection";
 import { log } from "~/util/Logger";
-import { ToolBar } from "~/components/ToolBar";
-import { LoadingScreen } from "~/components/LoadingScreen";
 import { ProxyManager } from "~/util/ProxyManager";
 
 export default function Home() {
@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="w-screen h-screen flex flex-col">
+      <main className="flex h-screen w-screen flex-col">
         <TabBar />
         <ToolBar />
         <iframe className="w-full flex-1" src="/app/internal/newtab"></iframe>

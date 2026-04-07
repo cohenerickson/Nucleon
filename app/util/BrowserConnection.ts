@@ -47,6 +47,8 @@ export class BrowserConnection {
     );
   }
 
+  // TODO: create a way to handle a "redudant" service worker
+  // (i.e. if the user clicks Clear All Data on the newtab)
   private async initializeServiceWorker(): Promise<ServiceWorker> {
     if (!("serviceWorker" in navigator)) {
       throw new Error("Service workers not supported");

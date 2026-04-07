@@ -1,5 +1,5 @@
-import { unzip, type Unzipped } from "fflate";
 import { XMLParser } from "fast-xml-parser";
+import { unzip, type Unzipped } from "fflate";
 
 const CHROME_VERSION = "148.0.7766.3";
 const parser = new XMLParser({

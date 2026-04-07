@@ -1,8 +1,8 @@
-import { openDB } from "idb";
 import { log } from "../../util/Logger";
 import { RPC } from "../../util/RPC";
 import type { BrowserDB } from "./BrowserStorage";
 import "/scram/scramjet.all.js";
+import { openDB } from "idb";
 
 declare const self: ServiceWorkerGlobalScope;
 export const browserRPC = new RPC("nucleon-browser-connection");
