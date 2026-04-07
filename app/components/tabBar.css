@@ -15,7 +15,7 @@
 }
 
 /* Chrome Catppuccin Macchiato theme for testing compatability */
-:root {
+/* :root {
   --color-frame: rgb(24, 25, 38);
   --color-frame_inactive: rgb(24, 25, 38);
   --color-bookmark_text: rgb(202, 211, 245);
@@ -25,25 +25,35 @@
   --color-toolbar: rgb(36, 39, 58);
   --color-toolbar_button_icon: rgb(202, 211, 245);
   --color-button_background: rgb(24, 25, 38);
-}
+} */
 
 /* Should each of these have their own internal css color varaible so we can have a coherent
  * hierarchy for different color properties applying to the same element simultaneously? */
 .tab-bar {
-  @apply flex w-full h-11 bg-frame border-b border-toolbar/50;
+  @apply bg-frame border-toolbar/50 flex h-11 w-full border-b;
+
+  -webkit-app-region: drag;
+  app-region: drag;
+
+  .tab-section:nth-child(3) {
+    @apply flex-1 pr-1;
+  }
 
   .tab-section {
-    @apply flex py-1 pl-1 gap-1;
+    @apply flex gap-1 py-1 pl-1;
 
     .tab {
-      @apply text-tab_background_text transition-colors pl-3 pr-2 py-1 flex gap-2 items-center justify-center text-sm w-48 bg-frame border-toolbar_vertical_separator rounded-md h-9;
+      @apply text-tab_background_text bg-frame border-toolbar_vertical_separator flex h-9 w-48 items-center justify-center gap-2 rounded-md py-1 pr-2 pl-3 text-sm transition-colors;
+
+      -webkit-app-region: no-drag;
+      app-region: no-drag;
 
       .text {
-        @apply text-xs flex-1;
+        @apply flex-1 text-xs;
       }
 
       .button {
-        @apply text-sm bg-frame;
+        @apply bg-frame text-sm;
       }
 
       &.active {
@@ -68,12 +78,27 @@
       }
 
       .button {
-        @apply rounded h-5 w-5 flex items-center justify-center transition-all;
+        @apply flex h-5 w-5 items-center justify-center rounded transition-all;
       }
 
       .button:hover {
         @apply brightness-150;
       }
     }
+  }
+
+  .overlay-spacer-left {
+    @apply shrink-0;
+
+    width: env(titlebar-area-x, 0);
+    flex-shrink: 0;
+  }
+
+  .overlay-spacer-right {
+    @apply shrink-0 justify-end;
+
+    width: calc(
+      100vw - env(titlebar-area-x, 0) - env(titlebar-area-width, 100vw)
+    );
   }
 }

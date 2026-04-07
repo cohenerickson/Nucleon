@@ -30,7 +30,7 @@
   @apply select-none;
 }
 
-input {
+input, .input {
   padding: 0;
   margin: 0;
   background: none;

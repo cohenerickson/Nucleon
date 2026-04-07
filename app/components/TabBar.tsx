@@ -14,6 +14,8 @@ export function TabBar() {
 
   return (
     <div className="tab-bar">
+      <div className="overlay-spacer-left"></div>
+
       <Reorder.Group
         as="div"
         className="tab-section"
@@ -37,6 +39,8 @@ export function TabBar() {
           <Tab key={tabId} id={tabId} pinned={false} />
         ))}
       </Reorder.Group>
+
+      <div className="overlay-spacer-right"></div>
     </div>
   );
 }

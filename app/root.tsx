@@ -31,6 +31,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           name="description"
           content="The next-generation web proxy platform with seamless integration and enhanced privacy features."
         />
+        <meta name="theme-color" content="#fafafa" />
         <Meta />
         <Links />
       </head>
