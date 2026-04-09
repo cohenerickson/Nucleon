@@ -1,19 +1,24 @@
 import type { browser } from "../api/Browser";
-import { openDB, type IDBPDatabase, type DBSchema } from "idb";
+import { openDB, type DBSchema } from "idb";
+import type { BrowserSettings } from "~/util/Settings";
+
+export const db = openDB<BrowserDB>("nucleon", 1, {
+  upgrade(db) {
+    db.createObjectStore("settings");
+    db.createObjectStore("addons");
+  }
+});
 
 export interface BrowserDB extends DBSchema {
-  browserState: {
-    key: "activeProfile" | "activeTheme";
-    value: string;
-  };
-  profiles: {
+  settings: {
     key: string;
-    value: {};
+    value: BrowserSettings;
   };
   addons: {
     key: string;
     value: {
       id: string;
+      profile: string;
       version: string;
       enabled: boolean;
       grantedPermissions: (keyof typeof browser)[];
