@@ -15,7 +15,7 @@
 }
 
 /* Chrome Catppuccin Macchiato theme for testing compatability */
-/* :root {
+:root {
   --color-frame: rgb(24, 25, 38);
   --color-frame_inactive: rgb(24, 25, 38);
   --color-bookmark_text: rgb(202, 211, 245);
@@ -25,51 +25,77 @@
   --color-toolbar: rgb(36, 39, 58);
   --color-toolbar_button_icon: rgb(202, 211, 245);
   --color-button_background: rgb(24, 25, 38);
-} */
+  --color-tab_line: rgb(140, 143, 161);
+}
 
 /* Should each of these have their own internal css color varaible so we can have a coherent
  * hierarchy for different color properties applying to the same element simultaneously? */
 .tab-bar {
-  @apply bg-frame border-toolbar/50 flex h-11 w-full border-b;
+  @apply bg-frame border-toolbar/50 flex h-11 w-full overflow-hidden border-b;
 
   -webkit-app-region: drag;
   app-region: drag;
 
-  .tab-section:nth-child(3) {
-    @apply flex-1 pr-1;
-  }
-
   .tab-section {
     @apply flex gap-1 py-1 pl-1;
 
-    .tab {
-      @apply text-tab_background_text bg-frame border-toolbar_vertical_separator flex h-9 w-48 items-center justify-center gap-2 rounded-md py-1 pr-2 pl-3 text-sm transition-colors;
+    &.normal-section {
+      @apply min-w-0 flex-1 pr-1;
+    }
 
+    &.pinned-section {
+      @apply shrink-0;
+    }
+
+    .tab {
+      @apply text-tab_background_text bg-frame border-toolbar_vertical_separator flex h-9 min-w-9 items-center gap-2 rounded-md py-1 pr-2 pl-3 text-sm transition-[background-color,filter,color,flex-basis,max-width,min-width,padding] duration-150;
+
+      container-type: inline-size;
       -webkit-app-region: no-drag;
       app-region: no-drag;
 
+      .favicon {
+        @apply shrink-0;
+      }
+
       .text {
-        @apply flex-1 text-xs;
+        @apply min-w-0 flex-1 truncate text-xs;
       }
 
       .button {
-        @apply bg-frame text-sm;
+        @apply shrink-0 text-sm;
+      }
+
+      .tab-section.normal-section & {
+        @apply max-w-56 flex-1;
+
+        flex-basis: 10rem;
       }
 
       &.active {
-        @apply bg-toolbar border-tab_line text-tab_text;
+        @apply bg-toolbar border-tab_line text-tab_text min-w-28;
+
+        flex-grow: 1.3;
+        flex-basis: 11.5rem;
 
         .button {
           @apply bg-toolbar;
         }
       }
 
-      &:hover {
+      .tab-section.normal-section &:not(.active):not(.pinned) {
+        flex-grow: 1;
+        flex-basis: 9rem;
+        min-width: 2.25rem;
+      }
+
+      &:hover:not(.active) {
         @apply brightness-125;
       }
 
-      &.pinned {
-        @apply w-9 p-0;
+      &.pinned,
+      .tab-section.pinned-section & {
+        @apply border-tab_line w-9 max-w-9 min-w-9 flex-none justify-center border p-0;
 
         label,
         .button {
@@ -78,12 +104,42 @@
       }
 
       .button {
-        @apply flex h-5 w-5 items-center justify-center rounded transition-all;
+        @apply bg-frame flex h-5 w-5 items-center justify-center rounded transition-all;
+
+        &:hover {
+          @apply brightness-125;
+        }
       }
 
-      .button:hover {
-        @apply brightness-150;
+      @container (max-width: 6rem) {
+        .tab-section.normal-section &:not(.active):not(.pinned) {
+          .button {
+            @apply hidden;
+          }
+        }
       }
+
+      @container (max-width: 2rem) {
+        .tab-section.normal-section &:not(.active):not(.pinned) {
+          @apply justify-center px-0;
+
+          .text,
+          .button {
+            @apply hidden;
+          }
+        }
+      }
+    }
+  }
+
+  .new-tab-button {
+    @apply bg-frame text-tab_background_text hover:bg-toolbar flex h-9 w-9 items-center justify-center rounded-md transition-colors;
+
+    -webkit-app-region: no-drag;
+    app-region: no-drag;
+
+    &:hover {
+      @apply brightness-115;
     }
   }
 

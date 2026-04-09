@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 import { LoadingScreen } from "~/components/LoadingScreen";
 import { TabBar } from "~/components/TabBar";
