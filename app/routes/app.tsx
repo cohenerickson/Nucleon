@@ -1,5 +1,6 @@
 import { AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
+import { BookmarkBar } from "~/components/BookmarkBar";
 import { LoadingScreen } from "~/components/LoadingScreen";
 import { TabBar } from "~/components/TabBar";
 import { ToolBar } from "~/components/ToolBar";
@@ -40,6 +41,7 @@ export default function Home() {
       <main className="flex h-screen w-screen flex-col">
         <TabBar />
         <ToolBar />
+        <BookmarkBar />
         <iframe className="w-full flex-1" src="/app/internal/newtab"></iframe>
       </main>
       <AnimatePresence>{!ready ? <LoadingScreen /> : null}</AnimatePresence>

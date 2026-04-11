@@ -16,7 +16,9 @@
     "rootDirs": [".", "./.react-router/types"],
     "paths": {
       "~/*": ["./app/*"],
-      "/scram/scramjet.all.js": ["./packages/scramjet/dist/types/index.d.ts"]
+      "/scram/scramjet.all.js": [
+        "./node_modules/@mercuryworkshop/scramjet/dist/types/index.d.ts"
+      ]
     },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,

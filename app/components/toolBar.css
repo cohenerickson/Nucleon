@@ -9,7 +9,7 @@
 }
 
 @theme {
-  --color-toolbar: #efefef;
+  --color-toolbar: inherit;
   --color-toolbar_button_icon: inherit;
   --color-button_background: inherit;
   --color-toolbar_vertical_separator: #e0e0e0;
@@ -20,7 +20,7 @@
   @apply bg-toolbar text-toolbar_button_icon flex h-10 w-full items-center gap-2 px-2;
 
   .browser-button {
-    @apply bg-toolbar flex h-6 w-6 items-center justify-center rounded text-lg transition-all;
+    @apply bg-toolbar flex h-6 w-6 items-center justify-center rounded text-lg transition-colors;
 
     &:hover {
       @apply brightness-75;
@@ -49,5 +49,9 @@
         @apply brightness-125;
       }
     }
+  }
+
+  .addon-section {
+    @apply flex items-center gap-1;
   }
 }

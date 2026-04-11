@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@reference "../app.css";
+
+@theme {
+  --color-toolbar: inherit;
+  --color-frame: inherit;
+  --color-toolbar_button_icon: inherit;
+  --color-tab_line: inherit;
+}
+
+.bookmark-bar {
+  @apply bg-toolbar text-toolbar_button_icon border-tab_line flex h-9 w-full items-center gap-1 border-b px-2;
+
+  .bookmark-section {
+    @apply flex flex-1 items-center gap-1;
+
+    .bookmark-item {
+      @apply bg-toolbar flex h-7 min-w-7 items-center justify-center rounded p-1 transition-colors;
+
+      &:hover {
+        @apply brightness-115;
+      }
+
+      .bookmark-title {
+        @apply truncate pl-2 text-xs;
+      }
+
+      &:has(.bookmark-title) {
+        @apply px-2;
+      }
+    }
+  }
+}

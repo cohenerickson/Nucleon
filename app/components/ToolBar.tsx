@@ -1,9 +1,11 @@
 import "./toolBar.css";
-import { use, useEffect, useRef, useState } from "react";
+import { Reorder } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import {
   IoBookmarkOutline,
   IoChevronBack,
   IoChevronForward,
+  IoCloudOfflineOutline,
   IoExtensionPuzzleOutline,
   IoHomeOutline,
   IoInformationCircleOutline,
@@ -14,6 +16,7 @@ import {
 export function ToolBar() {
   const urlRef = useRef<HTMLDivElement>(null);
   const [url, setUrl] = useState("nucleon://newtab");
+  const [pinnedAddons, setPinnedAddons] = useState<string[]>(["a", "b", "c"]);
 
   function generateStyledValue(): void {
     if (!urlRef.current) return;
@@ -103,6 +106,25 @@ export function ToolBar() {
             ref={urlRef}
           ></div>
         </div>
+        <Reorder.Group
+          as="div"
+          className="addon-section"
+          axis="x"
+          values={pinnedAddons}
+          onReorder={setPinnedAddons}
+        >
+          {pinnedAddons.map((addonId) => (
+            <Reorder.Item
+              as="div"
+              value={addonId}
+              key={addonId}
+              className="browser-button"
+            >
+              {/* Eventually render the actual addon icon here */}
+              <IoCloudOfflineOutline />
+            </Reorder.Item>
+          ))}
+        </Reorder.Group>
         <div className="browser-button">
           <IoExtensionPuzzleOutline />
         </div>
@@ -110,7 +132,6 @@ export function ToolBar() {
           <IoMenuOutline />
         </div>
       </div>
-      <div className="tool-bar"></div>
     </>
   );
 }
