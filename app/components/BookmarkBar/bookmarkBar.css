@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@reference "../app.css";
+@reference "../../app.css";
 
 @theme {
   --color-toolbar: inherit;

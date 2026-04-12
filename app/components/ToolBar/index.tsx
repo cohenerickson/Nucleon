@@ -1,3 +1,4 @@
+import { ActionButton } from "./ActionButton";
 import "./toolBar.css";
 import { Reorder } from "motion/react";
 import { useEffect, useRef, useState } from "react";
@@ -5,7 +6,6 @@ import {
   IoBookmarkOutline,
   IoChevronBack,
   IoChevronForward,
-  IoCloudOfflineOutline,
   IoExtensionPuzzleOutline,
   IoHomeOutline,
   IoInformationCircleOutline,
@@ -114,15 +114,7 @@ export function ToolBar() {
           onReorder={setPinnedAddons}
         >
           {pinnedAddons.map((addonId) => (
-            <Reorder.Item
-              as="div"
-              value={addonId}
-              key={addonId}
-              className="browser-button"
-            >
-              {/* Eventually render the actual addon icon here */}
-              <IoCloudOfflineOutline />
-            </Reorder.Item>
+            <ActionButton key={addonId} id={addonId} />
           ))}
         </Reorder.Group>
         <div className="browser-button">

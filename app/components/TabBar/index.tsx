@@ -3,7 +3,7 @@ import { Tab } from "./Tab";
 // so we use a separate CSS file with nested properties to help simplify.
 // This technique will be used across the app for other components.
 import "./tabBar.css";
-import { Reorder, useDragControls } from "motion/react";
+import { Reorder } from "motion/react";
 import { useState } from "react";
 import { IoAdd } from "react-icons/io5";
 

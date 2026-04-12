@@ -10,6 +10,9 @@ export function BookmarkBar() {
     ""
   ]);
 
+  // Extend out to bookmark and bookmark folder components once popup
+  // component is created
+
   return (
     <>
       <div className="bookmark-bar">
