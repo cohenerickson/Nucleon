@@ -1,6 +1,7 @@
 import type { Route } from "./+types/root";
 import "./app.css";
 import { LoadingScreen } from "./components/LoadingScreen";
+import { RPC } from "./util/RPC";
 import {
   isRouteErrorResponse,
   Links,
@@ -9,6 +10,9 @@ import {
   Scripts,
   ScrollRestoration
 } from "react-router";
+
+// @ts-ignore - expose rpc for testing purposes
+globalThis.RPC = RPC;
 
 export function HydrateFallback() {
   return (
@@ -30,7 +34,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           name="description"
           content="The next-generation web proxy platform with seamless integration and enhanced privacy features."
         />
-        <meta name="theme-color" content="#fafafa" />
+        <meta name="theme-color" content="#181926" />
         <Meta />
         <Links />
       </head>

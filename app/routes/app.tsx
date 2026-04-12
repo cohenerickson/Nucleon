@@ -1,20 +1,29 @@
 import { AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
+import type { BrowserSettings } from "~/browser/services/BrowserStorage";
 import { BookmarkBar } from "~/components/BookmarkBar";
 import { LoadingScreen } from "~/components/LoadingScreen";
 import { TabBar } from "~/components/TabBar";
 import { ToolBar } from "~/components/ToolBar";
+import { Defaults } from "~/config/Settings";
 import { BrowserConnection } from "~/util/BrowserConnection";
 import { log } from "~/util/Logger";
 import { ProxyManager } from "~/util/ProxyManager";
+import { getSettings, updateSettings } from "~/util/State";
 
 export default function Home() {
   const [ready, setReady] = useState(false);
+  const [settings, setSettings] = useState<BrowserSettings>(Defaults);
 
   // Initialization logic for loading the app's core
   // This includes loading proxy scripts, and registering service workers
   useEffect(() => {
     (async () => {
+      log.debug("Loading settings");
+      const profileSettings = await getSettings();
+      updateSettings(profileSettings);
+      setSettings(profileSettings);
+
       log.debug("Initializing ProxyManager");
       const proxyManager = new ProxyManager();
       await proxyManager.initialize();

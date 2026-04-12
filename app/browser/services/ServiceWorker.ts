@@ -1,5 +1,11 @@
 import { log } from "../../util/Logger";
 import { RPC } from "../../util/RPC";
+import {
+  download,
+  getLatestVersion,
+  installExtension
+} from "../util/ExtFetcher";
+import "../util/Network";
 import type { BrowserDB } from "./BrowserStorage";
 import "/scram/scramjet.all.js";
 import { openDB } from "idb";
@@ -21,16 +27,23 @@ self.addEventListener("fetch", (event) => {
     (async () => {
       await scramjet.loadConfig();
 
-      // // Handle Scramjet Requests first
+      // Handle cached files such as extension resources first
+      const cachedResponse = await caches.match(event.request);
+      if (cachedResponse) {
+        log.debug("Serving request from cache:", event.request.url);
+        return cachedResponse;
+      }
+
+      // Then we can handle Scramjet requests
       if (scramjet.route(event)) {
         return scramjet.fetch(event);
       }
 
-      // TODO: Handle cached addon resources next
-
+      // Before falling back to the network for any other requests
       return await fetch(event.request);
     })()
   );
+
   log.debug("Service worker received fetch event for:", event.request.url);
 });
 
@@ -55,4 +68,32 @@ function initializeRPCHandlers(rpc: RPC) {
       state: "ready"
     };
   });
+
+  rpc.expose(
+    "nucleon.internal.getAddonVersion",
+    async (platform: string, id: string) => {
+      log.debug(
+        `Received RPC request for addon version: platform=${platform}, id=${id}`
+      );
+
+      return await getLatestVersion(platform as "firefox" | "chrome", id);
+    }
+  );
+
+  rpc.expose(
+    "nucleon.internal.installAddon",
+    async (platform: "firefox" | "chrome", id: string) => {
+      log.debug(
+        `Received RPC request to install addon: platform=${platform}, id=${id}`
+      );
+
+      const data = await download(platform, id);
+
+      log.debug(
+        `Downloaded addon data for ${id}, size=${data.byteLength} bytes, installing...`
+      );
+
+      return await installExtension(id, data);
+    }
+  );
 }

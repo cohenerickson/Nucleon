@@ -102,36 +102,34 @@ export class AddonRuntime extends RPC {
   }
 
   private async initTheme(manifest: Manifest) {
-    const activeTheme = await (
-      await browserDB
-    ).get("browserState", "activeTheme");
-
-    if (activeTheme === this.id) {
-      log.info(`[AddonRuntime] Activating theme ${this.id}`);
-      await browserRPC.call("nucleon.internal.setActiveTheme", manifest.theme);
-    } else {
-      log.info(`[AddonRuntime] Requesting theme activation for ${this.id}`);
-      const themeActivation = await browserRPC.call(
-        "nucleon.internal.requestThemeActivation",
-        this.id,
-        manifest
-      );
-
-      if (themeActivation) {
-        log.info(
-          `[AddonRuntime] Theme activation approved for ${this.name}, activating...`
-        );
-        await browserRPC.call(
-          "nucleon.internal.setActiveTheme",
-          manifest.theme
-        );
-        log.info(`[AddonRuntime] Successfully activated theme ${this.name}`);
-      } else {
-        log.info(
-          `[AddonRuntime] Theme activation request denied for ${this.name}`
-        );
-      }
-    }
+    // TODO: re-think how themes get loaded, currently have the full theme stored in browser settings
+    // instead of just the extension id because of the firefox addon theme api
+    // const settings = await getSettings();
+    // if (settings.theme === this.id) {
+    //   log.info(`[AddonRuntime] Activating theme ${this.id}`);
+    //   await browserRPC.call("nucleon.internal.setActiveTheme", manifest.theme);
+    // } else {
+    //   log.info(`[AddonRuntime] Requesting theme activation for ${this.id}`);
+    //   const themeActivation = await browserRPC.call(
+    //     "nucleon.internal.requestThemeActivation",
+    //     this.id,
+    //     manifest
+    //   );
+    //   if (themeActivation) {
+    //     log.info(
+    //       `[AddonRuntime] Theme activation approved for ${this.name}, activating...`
+    //     );
+    //     await browserRPC.call(
+    //       "nucleon.internal.setActiveTheme",
+    //       manifest.theme
+    //     );
+    //     log.info(`[AddonRuntime] Successfully activated theme ${this.name}`);
+    //   } else {
+    //     log.info(
+    //       `[AddonRuntime] Theme activation request denied for ${this.name}`
+    //     );
+    //   }
+    // }
   }
 
   destroy(): void {
