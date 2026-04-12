@@ -12,7 +12,11 @@ export const manifest = {
       sizes: "32x32",
       type: "image/png"
     },
-
+    {
+      src: "icons/192.png",
+      sizes: "192x192",
+      type: "image/png"
+    },
     {
       src: "icons/512.png",
       sizes: "512x512",
