@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsx ./build.ts && react-router build",
     "dev": "concurrently \"tsx ./build.ts --dev\" \"wisp-js-server\" \"react-router dev\"",
-    "start": "react-router-serve ./build/server/index.js",
+    "start": "concurrently \"tsx ./demoProductionServer.ts\" \"wisp-js-server\"",
     "typecheck": "react-router typegen && tsc",
     "format": "prettier --write ./app"
   },
@@ -33,7 +33,6 @@
     "vanta": "^0.5.24"
   },
   "devDependencies": {
-    "@mercuryworkshop/wisp-js": "^0.4.1",
     "@react-router/dev": "7.12.0",
     "@tailwindcss/vite": "^4.1.13",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
@@ -57,4 +56,3 @@
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
-
