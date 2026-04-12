@@ -1,30 +1,5 @@
-import { db } from "~/browser/services/BrowserStorage";
+import { db, type BrowserSettings } from "~/browser/services/BrowserStorage";
 import { Defaults } from "~/config/Settings";
-
-export type BrowserSettings = {
-  homepage: string;
-  searchEngine: string;
-  proxy: "scramjet";
-  transport: {
-    type: "wisp" | "bare";
-    path: string;
-    server: string;
-  };
-  view: {
-    homeButton: boolean;
-    bookmarksBar: boolean;
-    autocomplete: {
-      enabled: boolean;
-      searches: boolean;
-      history: boolean;
-      bookmarks: boolean;
-    };
-    fullUrls: boolean;
-    roundedContent: boolean;
-    tabHover: "card" | "tooltip" | "none";
-  };
-  shortcuts: {};
-};
 
 const UpdateHandlers: ((settings: BrowserSettings) => void)[] = [];
 

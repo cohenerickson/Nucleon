@@ -1,9 +1,10 @@
-import type { BrowserSettings } from "~/util/Settings";
+import type { BrowserSettings } from "~/browser/services/BrowserStorage";
 
 export const Defaults = {
   homepage: "nucleon://newtab",
   searchEngine: "https://www.google.com/search?q=%s",
   proxy: "scramjet",
+  theme: {},
   transport: {
     type: "wisp",
     path: "/epoxy/index.mjs",

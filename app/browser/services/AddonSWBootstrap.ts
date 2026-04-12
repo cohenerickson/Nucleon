@@ -4,7 +4,7 @@ import { RPC } from "../../util/RPC";
 // for the most part we are taking addons directly from the webstore and the existence
 // of this object shouldn't cause issues, but for security reasons we will need to
 // isolate it later on. For a proof of concept and early stages of development this should be fine though.
-import { browser as _browserAPI } from "../api/Browser";
+import { browser as _browserAPI } from "../polyfill/Browser";
 import type { BrowserDB } from "./BrowserStorage";
 import { openDB } from "idb";
 

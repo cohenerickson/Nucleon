@@ -1,4 +1,4 @@
-import { getSettings } from "./Settings";
+import { getSettings } from "./State";
 import { Proxy } from "./proxies/Proxy";
 import { ScramJet } from "./proxies/ScramJet";
 import type { BareMuxConnection } from "@mercuryworkshop/bare-mux";

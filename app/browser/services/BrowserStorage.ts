@@ -1,6 +1,6 @@
-import type { browser } from "../api/Browser";
+import type { browser } from "../polyfill/Browser";
+import type { Manifest } from "../types/Manifest";
 import { openDB, type DBSchema } from "idb";
-import type { BrowserSettings } from "~/util/Settings";
 
 export const db = openDB<BrowserDB>("nucleon", 1, {
   upgrade(db) {
@@ -28,5 +28,31 @@ export interface BrowserDB extends DBSchema {
     };
   };
 }
+
+export type BrowserSettings = {
+  homepage: string;
+  searchEngine: string;
+  proxy: "scramjet";
+  theme: Manifest["theme"];
+  transport: {
+    type: "wisp" | "bare";
+    path: string;
+    server: string;
+  };
+  view: {
+    homeButton: boolean;
+    bookmarksBar: boolean;
+    autocomplete: {
+      enabled: boolean;
+      searches: boolean;
+      history: boolean;
+      bookmarks: boolean;
+    };
+    fullUrls: boolean;
+    roundedContent: boolean;
+    tabHover: "card" | "tooltip" | "none";
+  };
+  shortcuts: {};
+};
 
 // Static methods on a BrowserStorage class?
